@@ -73,7 +73,8 @@ SAS statements can span multiple lines
 Multiple SAS statements can appear on the same line, so long as each is
 separated by a semicolon
 
-`run;` statements aren't necessary in some cases, but their use is recommended
+A `run;` statement, which creates a "step boundary," marking the end of a step,
+isn't required between steps in a program, but is recommended
 
 ## Programming Language
 
@@ -116,7 +117,44 @@ Data can either be read inline or from external sources, such as `.txt`,
 
 SAS data sets can either be temporary or permanent
 
+Temporary data sets are stored in the `WORK` library and are deleted at the end
+of each SAS session
+
+Permanent data sets are saved to disk
+
 ## DATA Step
+
+SAS data sets are temporary, by default
+
+In the code above, `example` is a temporary SAS data set
+
+To read or write a *permanent* SAS data set, use dot notation such as
+`libref.dataset`
+
+The `libref` is a name associated with a SAS library or directory location
+
+It is possible to use `work.dataset` to be explicit about temporary data sets
+
+## DATA Step
+
+To set up a `libref` use the `libname` keyword
+
+```
+libname mylib 'path/to/dir';
+```
+
+In this example, `mylib` is a variable representing the `path/to/dir` location
+
+Note that `libref` names can only be 8 character long
+
+```
+data mylib.example;
+    ...
+run;
+```
+
+In the code above, the data set `example` will be saved to the location
+associated with `mylib`
 
 ## PROC Step
 
