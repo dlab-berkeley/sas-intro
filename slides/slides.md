@@ -42,9 +42,17 @@ Includes:
 >The SAS language contains statements, expressions, functions and CALL
 routines, options, formats, and informats
 
+There are two main components:
 
+* data steps
+* procedure steps
+
+SAS programs&mdash;files ending in the `.sas` file extension&mdash;typically
+include several DATA and PROC steps
 
 ## Programming Language
+
+Example of a DATA step
 
 ```
 data example;
@@ -65,6 +73,8 @@ SAS statements can span multiple lines
 Multiple SAS statements can appear on the same line, so long as each is
 separated by a semicolon
 
+`run;` statements aren't necessary in some cases, but their use is recommended
+
 ## Programming Language
 
 #### SAS Names
@@ -84,9 +94,31 @@ Names are *not* case sensitive
 
 ## Data Representation
 
+In SAS, data is organized into rows and columns in what is called a SAS data
+set
+
+x1   |  x2  | x3
+:--: | :--: | --
+25   |  m   | berkeley
+26   |  f   | san francisco
+23   |  f   | oakland
+24   |  m   | marin
+
+Each row is sometimes called an "observation" and each column a "variable"
+
 ## DATA Step
 
-## PROC STEP
+DATA steps begin with the `data` statement and are typically used to create,
+modify, or replace SAS data sets
+
+Data can either be read inline or from external sources, such as `.txt`,
+`.csv`, or `.sas7bdat` files
+
+SAS data sets can either be temporary or permanent
+
+## DATA Step
+
+## PROC Step
 
 # References
 
@@ -95,3 +127,4 @@ Names are *not* case sensitive
 - http://www.stat.berkeley.edu/~spector/s100/sas.pdf
 - http://www.ats.ucla.edu/stat/sas/library/SASRead_os.htm
 - http://www2.sas.com/proceedings/sugi31/246-31.pdf
+- https://www.ssc.wisc.edu/sscc/pubs/4-18.htm
