@@ -1,7 +1,3 @@
-INTRO
-BASE SAS
-
-
 % Introduction to SAS
 % Juan Shishido, D-Lab, UC Berkeley
 % Month Day, 2016
@@ -242,9 +238,37 @@ proc print data=example (obs=10);
 run;
 ```
 
+# Running SAS Code
+
+## Ways to Run SAS Programs
+
 # Coding
 
 ## Your First Program
+
+To this point, we've described, at a high level, the two primary components of
+the SAS language
+
+For the remainder of the workshop, we'll write and modify SAS code in order to
+get familiar with the details and work through common problems
+
+To start, let's open the file in the `code/` directory named `firstprogram.sas`
+
+Here, we'll create a SAS data set using inline data and print some summary
+statistics
+
+## Your First Program
+
+In this example, we're creating a SAS data set that we're naming `auto`
+
+We use `datalines` to let SAS know the data will provided inline
+
+The the `input` statement is used to specify the variable names&mdash;in this
+case, there are five columns, so we list five variable names
+
+You may have noticed a `$` after the `make` variable name
+
+This lets SAS know that `make` is a character variable
 
 ## Output
 

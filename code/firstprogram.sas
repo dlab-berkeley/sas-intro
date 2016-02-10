@@ -9,8 +9,8 @@ source: http://www.ats.ucla.edu/stat/sas/modules/descript.htm */
 
 * create the SAS data set;
 data auto;
-  input MAKE $ PRICE MPG REP78 FOREIGN;
-DATALINES;
+  input make $ price mpg rep78 foreign;
+datalines;
 AMC    4099 22 3 0
 AMC    4749 17 3 0
 AMC    3799 22 3 0
@@ -38,7 +38,7 @@ Datsun 4589 35 5 1
 Datsun 5079 24 4 1
 Datsun 8129 21 4 1
 ;
-RUN;
+run;
 
 * fuel efficiency;
 proc means data=auto;
