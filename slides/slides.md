@@ -242,6 +242,20 @@ run;
 
 ## Ways to Run SAS Programs
 
+There are several ways to execute or run SAS programs
+
+>They differ in the speed with which they run, the amount of computer resources 
+that are required, and the amount of interaction that you have with the program 
+(that is, the kinds of changes you can make while the program is running).
+
+The results and output&mdash;that is, the data sets and values&mdash;are the
+same regardless of the way the program is executed (although the *appearance*
+might be different)
+
+## Ways to Run SAS Programs
+
+### Windowing Environment
+
 # Coding
 
 ## Your First Program
@@ -263,6 +277,9 @@ In this example, we're creating a SAS data set that we're naming `auto`
 
 We use `datalines` to let SAS know the data will provided inline
 
+Notice that semicolons (`;`) are *not* used at the end of each data line, only
+at the end of the block
+
 The the `input` statement is used to specify the variable names&mdash;in this
 case, there are five columns, so we list five variable names
 
@@ -270,7 +287,39 @@ You may have noticed a `$` after the `make` variable name
 
 This lets SAS know that `make` is a character variable
 
+## Your First Program
+
+Let's say we're interested in calculating the average mpg for foreign and
+domestic cars in our data set
+
+We can do this using the means procedure (`proc means`)
+
+Here, we specify the input data (`data=auto`), the variable we want the means
+for (`var mpg`), and the "by" group (`class foreign`)
+
+As we learned above, we can submit this program in one of several ways
+
+We'll choose batch mode and run the code from the command line using
+
+```
+$ sas firstprogram.sas
+```
+
 ## Output
+
+If things go well, you won't see any output when you submit this program
+
+So, where does the output go?
+
+Whenever programs (or individual SAS code blocks) are run, SAS always produces
+a log file (with file extension `.log`)
+
+This gives information about the steps that were executed, how long they took,
+and messages related to any particular errors
+
+In addition, if there are things that are printed (a lot of `PROC`s produce
+this type of output), a listing file will be created (with file extension
+`.lst`)
 
 ## Comments
 
