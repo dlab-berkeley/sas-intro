@@ -357,7 +357,84 @@ this type of output), a listing file will be created (with file extension
 
 ## Comments
 
-## Reading
+SAS provides two ways to add comments
+
+```
+*message;
+```
+
+```
+/*message*/
+```
+
+SAS ignores comments during processing
+
+## Loading
+
+Typically, `datalines` won't be used in practice
+
+Instead, we load data from external sources
+
+These can be comma-separated value files, for example, or SAS data sets
+
+When loading data, we must use either `infile` or `set` statements, depending
+on the data source
+
+## Loading
+
+In `data/` there is a small CSV file named `mtcars.csv`
+
+To load this data into SAS, use the following (a `.sas` file can also be found
+in `code/`)
+
+```
+data cars;
+    infile 'mtcars.csv' dlm=',' dsd firstobs=2;
+    input model : $19. mpg cyl disp hp
+          drat wt qsec vs am gear carb;
+run;
+```
+
+This `infile` statement includes several options we have not seen before
+
+## Loading
+
+Perhaps the most important is the `dlm` option, which specifies the delimiter
+that separates the variables in the file
+
+If data contains missing values, as `mtcars.csv` does, the `dsd` options allows
+SAS to recognize two consecutive delimiters as such
+
+`dsd` also allows the data to include the delimiter within quoted strings
+
+Finally, the `firstobs` option allows us to specify the line at which SAS
+should start reading data from
+
+Because `mtcars.csv` includes a "header" with variable names, we start at line
+2
+
+## Loading
+
+We have previously seen that `$` lets SAS know the associated column should be
+read in as character
+
+By default, SAS only reads the first 8 characters, but we can specify a length
+
+The drawback is that we have to know the maximum length, which is 19 in this
+case
+
+The colon modifier (`:`) is also important here as it tells SAS to read the
+record until there it encounters the delimiter
+
+The `.` in `$19.` is also necessary
+
+## Loading
+
+This is what the `.lst` file looks like
+
+![](../images/mtcars-lst.png)
+
+## Creating Variables
 
 ## Analyzing
 
@@ -370,3 +447,4 @@ this type of output), a listing file will be created (with file extension
 - http://www2.sas.com/proceedings/sugi31/246-31.pdf
 - https://www.ssc.wisc.edu/sscc/pubs/4-18.htm
 - https://support.sas.com/documentation/cdl/en/proc/61895/PDF/default/proc.pdf
+- http://www.ats.ucla.edu/stat/sas/faq/InfileOptions_ut.htm
