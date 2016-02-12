@@ -256,6 +256,40 @@ might be different)
 
 ### Windowing Environment
 
+The SAS windowing environment is a stand-alone desktop application
+
+It includes, among other things, an editor for writing code and an output
+window
+
+Entire programs or individual code blocks can be submitted
+
+Log information and output is typically printed to their corresponding windows
+instead of being saved to external files
+
+## Ways to Run SAS Programs
+
+### SAS Studio
+
+![](../images/sas-studio.png)
+
+## Ways to Run SAS Programs
+
+### Noninteractive mode
+
+With this approach, entire SAS programs are submitted
+
+This is the only way to interact with SAS if all you have access to is a
+command line interface
+
+To run a SAS program from the command line
+
+```
+$ sas filename.sas
+```
+
+The log information is saved to `filename.log` and the output, if any, to
+`filename.lst`
+
 # Coding
 
 ## Your First Program
