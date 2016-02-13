@@ -6,9 +6,8 @@ data cars;
     hp_per_liter = hp / liters;
 run;
 
-proc sort data=cars
-    out=power_density
-        (keep=model hp_per_liter);
+proc sort data=cars out=power_density
+        (keep=model hp liters hp_per_liter);
     by descending hp_per_liter;
 run;
 
