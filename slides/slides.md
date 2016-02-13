@@ -445,7 +445,7 @@ disp / 61.024;`
 
 We might also be interested the vehicles' power density values
 
-Below is the entire DATA step
+## Creating Variables
 
 ```
 data cars;
@@ -457,18 +457,47 @@ data cars;
 run;
 ```
 
-## Sorting
+Because we're curious about which cars are the most power dense, we should sort
+our existing SAS data set by `hp_per_liter`, in descending order
 
-Because we're curious about which cars are the most power dense, we want to
-sort our existing SAS data set by `hp_per_liter`, in descending order
+## Sorting
 
 ```
 proc sort data=cars
     out=power_density
         (keep=model hp_per_liter);
-    by hp_per_liter;
+    by descending hp_per_liter;
 run;
 ```
+
+The `out` option tells SAS that the procedure should create a new data set
+called `power_density`
+
+To this, we add a `keep` option, only keeping the `model`, `hp`, `liters`, and
+`hp_per_liter` variables; without this option, all variables would be written
+to `power_density`
+
+## Sorting
+
+```
+proc sort data=cars out=power_density
+        (keep=model hp liters hp_per_liter);
+    by descending hp_per_liter;
+run;
+```
+
+The `by` statement tells the procedure what variable(s) we'd like to sort by
+
+By default, sorting occurs in ascending order
+
+To sort in descending order, add the `descending` keyword *before* the variable
+name
+
+## Sorting
+
+The Ferrari and Lotus models are the most power dense
+
+![](../images/power_density-lst.png)
 
 ## Analyzing
 
