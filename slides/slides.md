@@ -436,6 +436,40 @@ This is what the `.lst` file looks like
 
 ## Creating Variables
 
+Next, let's say we're interested in converting our displacement variable
+(`disp`) from cubic inches to liters, using the conversion rate found
+[here](http://www.metric-conversions.org/volume/cubic-inches-to-liters.htm)
+
+In SAS, we can simply add the following to our existing DATA step: `liters =
+disp / 61.024;`
+
+We might also be interested the vehicles' power density values
+
+Below is the entire DATA step
+
+```
+data cars;
+    infile 'mtcars.csv' dlm=',' dsd firstobs=2;
+    input model : $19. mpg cyl disp hp
+          drat wt qsec vs am gear carb;
+    liters = disp / 61.024;
+    hp_per_liter = hp / liters;
+run;
+```
+
+## Sorting
+
+Because we're curious about which cars are the most power dense, we want to
+sort our existing SAS data set by `hp_per_liter`, in descending order
+
+```
+proc sort data=cars
+    out=power_density
+        (keep=model hp_per_liter);
+    by hp_per_liter;
+run;
+```
+
 ## Analyzing
 
 # References
