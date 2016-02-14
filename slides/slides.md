@@ -557,7 +557,7 @@ proc summary data=cars;
 run;
 ```
 
-`proc summary` requires that we specify an output data set using `output out=`
+`proc summary` requires that we specify an output data set using `output out`
 
 This procedure is flexible, allowing us to calculate sums, means, and much more
 
@@ -602,12 +602,32 @@ Using SQL syntax, we can recreate the results from the `proc summary` step
 ## Sums
 
 ```
-Obs    _FREQ_    hp_total    hp_mean
+        Obs    _FREQ_    hp_total    hp_mean
 
- 1       32        4694      146.688
+         1       32        4694      146.688
 ```
 
-## Array
+## Loops
+
+
+
+## IF-THEN/ELSE
+
+SAS supports control flow with the `if` and `else` statements
+
+```
+if expression then statement;
+<else statement>;
+```
+
+If the condition(s) in the `if` clause are met, the statement is executed
+
+Otherwise, the next line is evaluated
+
+The optional `else` statement, which must immediately follow the IF-THEN
+statement, is executed if the `then` clause before it isn't
+
+## IF-THEN/ELSE
 
 ## Analyzing
 
@@ -615,11 +635,12 @@ Obs    _FREQ_    hp_total    hp_mean
 
 ## Links
 
-- http://www.stat.berkeley.edu/~spector/s100/sas.pdf
-- http://www.ats.ucla.edu/stat/sas/library/SASRead_os.htm
-- http://www2.sas.com/proceedings/sugi31/246-31.pdf
-- https://www.ssc.wisc.edu/sscc/pubs/4-18.htm
-- https://support.sas.com/documentation/cdl/en/proc/61895/PDF/default/proc.pdf
-- http://www.ats.ucla.edu/stat/sas/faq/InfileOptions_ut.htm
-- http://www.lexjansen.com/nesug/nesug12/cc/cc35.pdf
-- http://www2.sas.com/proceedings/sugi27/p191-27.pdf
+- [An Introduction to the SAS System](http://www.stat.berkeley.edu/~spector/s100/sas.pdf)
+- [Reading Data into SAS](http://www.ats.ucla.edu/stat/sas/library/SASRead_os.htm)
+- [SAS DATA Steps](https://www.ssc.wisc.edu/sscc/pubs/4-18.htm)
+- [Base SAS 9.2 Procedures Guide](https://support.sas.com/documentation/cdl/en/proc/61895/PDF/default/proc.pdf)
+- [`infile`](http://www.ats.ucla.edu/stat/sas/faq/InfileOptions_ut.htm)
+- [`sum` function](http://www.lexjansen.com/nesug/nesug12/cc/cc35.pdf)
+- [`proc sql`](http://www2.sas.com/proceedings/sugi27/p191-27.pdf)
+- [IF-THEN/ELSE](http://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a000202239.htm)
+- [`do` loops](http://support.sas.com/documentation/cdl/en/lestmtsref/63323/HTML/default/viewer.htm#p1cydk5fq0u4bfn1xfbjt7w1c7lu.htm)
