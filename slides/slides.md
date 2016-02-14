@@ -6,7 +6,7 @@
 
 ## What is SAS
 
->SAS is an integrated system of software solutions
+>SAS is an integrated system of software solutions.
 
 It enables:
 
@@ -42,7 +42,7 @@ Base SAS is at the core of the SAS System
 ## Programming Language
 
 >The SAS language contains statements, expressions, functions and CALL
-routines, options, formats, and informats
+routines, options, formats, and informats.
 
 There are two main components:
 
@@ -175,7 +175,7 @@ It's important to note that both the `datalines` and `infile` approaches
 require the use of an `input` statement, which
 
 >Describes the arrangement of values in the input data record and assigns input 
-values to the corresponding SAS variables
+values to the corresponding SAS variables.
 
 We'll see these in more detail when we start writing our programs
 
@@ -463,9 +463,8 @@ our existing SAS data set by `hp_per_liter`, in descending order
 ## Sorting
 
 ```
-proc sort data=cars
-    out=power_density
-        (keep=model hp_per_liter);
+proc sort data=cars out=power_density
+        (keep=model hp liters hp_per_liter);
     by descending hp_per_liter;
 run;
 ```
@@ -499,6 +498,117 @@ The Ferrari and Lotus models are the most power dense
 
 ![](../images/power_density-lst.png)
 
+## String Manipulation
+
+It might be useful to extract the make from the `model` variable
+
+To do this, we can use the `scan()` function to our existing DATA step
+
+```
+make = scan(model, 1, ' ');
+```
+
+`scan()` takes a string as its first argument&mdash;in this case,
+`model`&mdash;a position, and a delimiter
+
+The string is split on the delimiter&mdash;a single space
+
+It then returns the first word
+
+## Sums
+
+In some cases, it might be useful to summarize our data by taking column sums
+
+We might be interested in knowing the total horsepower for the vehicles in our
+data set, for example
+
+There are several ways to do this
+
+## Sums
+
+One way is to use `proc print`
+
+```
+proc print data=cars;
+    var hp;
+    sum hp;
+run;
+```
+
+This prints all of the `hp` observations in `cars`, but adds a total at the
+bottom of the output
+
+In some cases, this isn't desirable
+
+We might, instead, want to only output the total
+
+## Sums
+
+>`proc summary` is one of the most powerful procedures to summarize numeric
+variables and place aggregated results into a new SAS data set.
+
+## Sums
+
+```
+proc summary data=cars;
+    var hp;
+    output out=cars_summ (drop=_TYPE_)
+        sum=hp_total mean=hp_mean;
+run;
+```
+
+`proc summary` requires that we specify an output data set using `output out=`
+
+This procedure is flexible, allowing us to calculate sums, means, and much more
+
+## Sums
+
+```
+proc summary data=cars;
+    var hp;
+    output out=cars_summ (drop=_TYPE_)
+        sum=hp_total mean=hp_mean;
+run;
+```
+
+The `drop` option next to the new data set name, `cars_sum`, tells SAS to not
+include the listed variables
+
+For the specified operations&mdash;that is, `sum` and `mean`&mdash;we list
+corresponding variable names
+
+## Sums
+
+>`proc sql` can sort, summarize, subset, join (merge), and concatenate
+datasets, create new variables, and print the results or create a new table or
+view all in one step.
+
+## Sums
+
+```
+proc sql;
+    create table cars_sql as
+    select count(*) as _FREQ_,
+           sum(hp) as hp_total,
+           mean(hp) as hp_mean
+    from cars;
+quit;
+```
+
+Note that `proc sql` steps end with `quit;` rather than `run;`
+
+Using SQL syntax, we can recreate the results from the `proc summary` step
+
+## Sums
+
+```
+Obs    _FREQ_    hp_total    hp_mean
+
+ 1       32        4694      146.688
+```
+
+## Array
+
 ## Analyzing
 
 # References
@@ -511,3 +621,5 @@ The Ferrari and Lotus models are the most power dense
 - https://www.ssc.wisc.edu/sscc/pubs/4-18.htm
 - https://support.sas.com/documentation/cdl/en/proc/61895/PDF/default/proc.pdf
 - http://www.ats.ucla.edu/stat/sas/faq/InfileOptions_ut.htm
+- http://www.lexjansen.com/nesug/nesug12/cc/cc35.pdf
+- http://www2.sas.com/proceedings/sugi27/p191-27.pdf
