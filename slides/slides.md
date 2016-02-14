@@ -609,7 +609,41 @@ Using SQL syntax, we can recreate the results from the `proc summary` step
 
 ## Loops
 
+Loops&mdash;referred to as `do` loops in SAS&mdash;enable iteration
 
+>[They execute] statements between the `do` and `end` statements repetitively,
+based on the value of an index variable.
+
+## Loops
+
+```
+data squares;
+    do x = 2 to 10 by 2;
+        x_squared = x ** 2;
+        output;
+    end;
+run;
+```
+
+This DATA step loops over the values 2 and 10 and outputs five
+records&mdash;the values 2, 4, ..., 10 as well as their squares
+
+The `output` statement "writes the current observation to data set"
+
+## Loops
+
+```
+data squares;
+    do x = 2 to 10 by 2;
+        x_squared = x ** 2;
+        output;
+    end;
+run;
+```
+The default increment in a `do` loop is 1
+
+However, we can use the `by` keyword to increment by any positive or negative
+number
 
 ## IF-THEN/ELSE
 
@@ -629,6 +663,18 @@ statement, is executed if the `then` clause before it isn't
 
 ## IF-THEN/ELSE
 
+Using our `cars` data set, let's conditionally output observations
+
+```
+data toyota mazda;
+    set cars;
+    if make = 'Toyota' then output toyota;
+    else if make = 'Mazda' then output mazda;
+run;
+```
+
+Here, we use `set` because `cars` is an existing SAS data set
+
 ## Analyzing
 
 # References
@@ -643,4 +689,6 @@ statement, is executed if the `then` clause before it isn't
 - [`sum` function](http://www.lexjansen.com/nesug/nesug12/cc/cc35.pdf)
 - [`proc sql`](http://www2.sas.com/proceedings/sugi27/p191-27.pdf)
 - [IF-THEN/ELSE](http://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a000202239.htm)
+- [Loops in SAS](http://blogs.sas.com/content/iml/2011/09/07/loops-in-sas.html)
 - [`do` loops](http://support.sas.com/documentation/cdl/en/lestmtsref/63323/HTML/default/viewer.htm#p1cydk5fq0u4bfn1xfbjt7w1c7lu.htm)
+- [Conditionally Writing Observations](http://support.sas.com/documentation/cdl/en/basess/58133/HTML/default/viewer.htm#a001343763.htm)
