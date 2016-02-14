@@ -26,6 +26,19 @@ proc sql;
     from cars;
 quit;
 
+data squares;
+    do x = 2 to 10 by 2;
+        x_squared = x ** 2;
+        output;
+    end;
+run;
+
+data toyota mazda;
+    set cars;
+    if make = 'Toyota' then output toyota;
+    else if make = 'Mazda' then output mazda;
+run;
+
 proc print data=cars;
 run;
 
@@ -36,4 +49,13 @@ proc print data=cars_summ;
 run;
 
 proc print data=cars_sql;
+run;
+
+proc print data=squares;
+run;
+
+proc print data=toyota;
+run;
+
+proc print data=mazda;
 run;
