@@ -445,6 +445,8 @@ With `proc import`, we specify the input data using `datafile`
 Because SAS recognizes that `.csv` files are comma-separated, we don't have to
 be explicit about the delimiter
 
+`proc import` requires that we provide an output data set using `out`
+
 ## Loading
 
 ```
@@ -455,16 +457,17 @@ proc import datafile='../data/mtcars.csv'
 run;
 ```
 
-`proc import` requires that we provide an output data set using `out`
-
 The `replace` option is used to overwrite an existing SAS data set
 
 Use the `getnames` option to specify whether variable names should be generated
 from the first record in the input file
 
+Because the first record for our input file has a missing value in the first
+position, SAS uses the default `VAR1` name for that column
+
 ## Loading
 
-This is what the `.lst` file looks like
+This is what the `.lst` file looks like for `cars`
 
 ![](../images/mtcars-lst.png)
 
@@ -708,8 +711,6 @@ run;
 ```
 
 Here, we use `set` because `cars` is an existing SAS data set
-
-## Analyzing
 
 # References
 
