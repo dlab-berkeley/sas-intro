@@ -430,12 +430,37 @@ The `.` in `$19.` is also necessary
 
 ## Loading
 
-Alternatively, we can use SAS's import procedure
-
 ```
-proc import
+proc import datafile='../data/mtcars.csv'
+    out=cars_imported
+    replace;
+    getnames=yes;
 run;
 ```
+
+Alternatively, we can use SAS's import procedure to load the data
+
+With `proc import`, we specify the input data using `datafile`
+
+Because SAS recognizes that `.csv` files are comma-separated, we don't have to
+be explicit about the delimiter
+
+## Loading
+
+```
+proc import datafile='../data/mtcars.csv'
+    out=cars_imported
+    replace;
+    getnames=yes;
+run;
+```
+
+`proc import` requires that we provide an output data set using `out`
+
+The `replace` option is used to overwrite an existing SAS data set
+
+Use the `getnames` option to specify whether variable names should be generated
+from the first record in the input file
 
 ## Loading
 
@@ -701,3 +726,4 @@ Here, we use `set` because `cars` is an existing SAS data set
 - [Loops in SAS](http://blogs.sas.com/content/iml/2011/09/07/loops-in-sas.html)
 - [`do` loops](http://support.sas.com/documentation/cdl/en/lestmtsref/63323/HTML/default/viewer.htm#p1cydk5fq0u4bfn1xfbjt7w1c7lu.htm)
 - [Conditionally Writing Observations](http://support.sas.com/documentation/cdl/en/basess/58133/HTML/default/viewer.htm#a001343763.htm)
+- [`proc import`](http://support.sas.com/documentation/cdl/en/proc/61895/HTML/default/viewer.htm#a000308090.htm)
