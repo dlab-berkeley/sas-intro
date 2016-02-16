@@ -389,7 +389,7 @@ in `code/`)
 
 ```
 data cars;
-    infile 'mtcars.csv' dlm=',' dsd firstobs=2;
+    infile '../data/mtcars.csv' dlm=',' dsd firstobs=2;
     input model : $19. mpg cyl disp hp
           drat wt qsec vs am gear carb;
 run;
@@ -430,6 +430,15 @@ The `.` in `$19.` is also necessary
 
 ## Loading
 
+Alternatively, we can use SAS's import procedure
+
+```
+proc import
+run;
+```
+
+## Loading
+
 This is what the `.lst` file looks like
 
 ![](../images/mtcars-lst.png)
@@ -449,7 +458,7 @@ We might also be interested the vehicles' power density values
 
 ```
 data cars;
-    infile 'mtcars.csv' dlm=',' dsd firstobs=2;
+    infile '../data/mtcars.csv' dlm=',' dsd firstobs=2;
     input model : $19. mpg cyl disp hp
           drat wt qsec vs am gear carb;
     liters = disp / 61.024;
