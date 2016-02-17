@@ -62,10 +62,18 @@ data toyota mazda;
     else if make = 'Mazda' then output mazda;
 run;
 
+proc export data=power_density;
+    outfile='../data/power_density.csv'
+    replace;
+run;
+
 proc print data=cars;
 run;
 
 proc print data=cars_imported;
+run;
+
+proc contents data=cars varnum;
 run;
 
 proc print data=power_density;

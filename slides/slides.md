@@ -471,6 +471,22 @@ This is what the `.lst` file looks like for `cars`
 
 ![](../images/mtcars-lst.png)
 
+## Contents
+
+`proc contents` describes a SAS data set
+
+```
+proc contents data=cars varnum;
+run;
+```
+
+This outputs information at both the data set and variable levels
+
+For example, it returns the number of observations, the number of variables,
+the variable names and formats, and much more
+
+The `varnum` option lists the variables in "creation order"
+
 ## Creating Variables
 
 Next, let's say we're interested in converting our displacement variable
@@ -608,7 +624,7 @@ proc summary data=cars;
 run;
 ```
 
-The `drop` option next to the new data set name, `cars_sum`, tells SAS to not
+The `drop` option next to the new data set name, `cars_summ`, tells SAS to not
 include the listed variables
 
 For the specified operations&mdash;that is, `sum` and `mean`&mdash;we list
@@ -711,6 +727,25 @@ run;
 ```
 
 Here, we use `set` because `cars` is an existing SAS data set
+
+## Exporting
+
+We've already seen how to create permanent SAS data sets
+
+Sometimes, we want to export data sets in other formats
+
+```
+proc export data=power_density
+    outfile='../data/power_density.csv'
+    replace;
+run;
+```
+
+This creates a `.csv` file in `data/` based on our `power_density` data set
+
+## Analysis
+
+
 
 # References
 
