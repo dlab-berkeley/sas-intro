@@ -745,7 +745,59 @@ This creates a `.csv` file in `data/` based on our `power_density` data set
 
 ## Analysis
 
+Let's say we wanted to get a count of the number of vehicles in each cylinder
+class
 
+That is, the number of 4-, 6-, and 8-cylinder cars in our data set
+
+For this, we could use the frequency procedure
+
+```
+proc freq data=cars;
+    table cyl;
+run;
+```
+
+## Analysis
+
+This produces the following output
+
+```
+                 The FREQ Procedure
+
+                              Cumulative    Cumulative
+cyl   Frequency    Percent     Frequency      Percent
+------------------------------------------------------
+  4         11      34.38            11        34.38  
+  6          7      21.88            18        56.25 
+  8         14      43.75            32       100.00 
+```
+
+## Analysis
+
+There are a relatively similar number of 4- and 8-cylinder cars in our data set
+
+A question we might want to answer is whether the horsepower differs between
+these groups
+
+For this, we can use SAS's t-test procedure
+
+## Analysis
+
+We first create a data set with only the 4- and 8-cylinder vehicles and then
+sort the data
+
+For the two-sample t-test
+
+```
+proc ttest data=cars_4_8;
+    class cyl;
+    var hp;
+run;
+```
+
+8-cylinder cars in our data set have, on average, 127 more horsepower than the
+4-cylinder cars in our data set
 
 # References
 

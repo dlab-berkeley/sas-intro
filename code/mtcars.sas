@@ -93,3 +93,28 @@ run;
 
 proc print data=mazda;
 run;
+
+proc contents data=cars varnum;
+run;
+
+proc export data=power_density
+    outfile='../data/power_density.csv'
+    replace;
+run;
+
+proc freq data=cars;
+    table cyl;
+run;
+
+data cars_4_8;
+    set cars (where=(cyl = 4 or cyl = 8));
+run;
+
+proc sort data=cars_4_8;
+    by cyl;
+run;
+
+proc ttest data=cars_4_8;
+    class cyl;
+    var hp;
+run;
