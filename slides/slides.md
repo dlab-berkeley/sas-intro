@@ -302,6 +302,26 @@ $ sas filename.sas
 The log information is saved to `filename.log` and the output, if any, to
 `filename.lst`
 
+## Getting Help
+
+An important programming skill is knowing *how* to find help
+
+SAS provides extensive documentation
+([link](https://support.sas.com/documentation/)) with information on syntax,
+options, and examples
+
+UCLA's Institute for Digital Research and Education
+([link](http://www.ats.ucla.edu/stat/sas/)) is another great resource
+
+## Getting Help
+
+Often times, I rely on Google searches like: "sas average by group"
+
+I sometimes search for specific information about a PROC
+
+Your searches might return papers from SUGI (SAS Users Group International) or
+NESUG (Northeast SAS Users Group)&mdash;these are often quite good
+
 # Coding
 
 ## `auto`
