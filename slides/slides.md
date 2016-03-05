@@ -177,8 +177,6 @@ require the use of an `input` statement, which
 >Describes the arrangement of values in the input data record and assigns input 
 values to the corresponding SAS variables.
 
-We'll see these in more detail when we start writing our programs
-
 # Data Analysis
 
 ## PROC Step
@@ -270,6 +268,20 @@ instead of being saved to external files
 
 ### SAS Studio
 
+>SAS Studio is a developmental web application for SAS that you access through
+your web browser.
+
+This is a web browser-based environment
+
+>With SAS Studio, you can access your data files, libraries, and existing
+programs and write new programs.
+
+In subsequent workshops, we'll use SAS Studio
+
+## Ways to Run SAS Programs
+
+### SAS Studio
+
 ![](../images/sas-studio.png)
 
 ## Ways to Run SAS Programs
@@ -292,54 +304,119 @@ The log information is saved to `filename.log` and the output, if any, to
 
 # Coding
 
-## Your First Program
+## `auto`
 
 To this point, we've described, at a high level, the two primary components of
 the SAS language
 
-For the remainder of the workshop, we'll write and modify SAS code in order to
+For the remainder of the workshop, we'll show and describe SAS code in order to
 get familiar with the details and work through common problems
 
-To start, let's open the file in the `code/` directory named `firstprogram.sas`
+We'll start by creating a SAS data set using inline data
 
-Here, we'll create a SAS data set using inline data and print some summary
-statistics
+Then, we'll print some summary statistics
 
-## Your First Program
+(The code for this can be found in `code/firstprogram.sas`)
+
+## `auto`
+
+```
+data auto;
+  input make $ price mpg rep78 foreign;
+datalines;
+AMC    4099 22 3 0
+    ...
+Datsun 8129 21 4 1
+;
+run;
+```
 
 In this example, we're creating a SAS data set that we're naming `auto`
 
 We use `datalines` to let SAS know the data will provided inline
 
+## `auto`
+
+```
+data auto;
+  input make $ price mpg rep78 foreign;
+datalines;
+AMC    4099 22 3 0
+    ...
+Datsun 8129 21 4 1
+;
+run;
+```
+
 Notice that semicolons (`;`) are *not* used at the end of each data line, only
 at the end of the block
 
+## `auto`
+
+```
+data auto;
+  input make $ price mpg rep78 foreign;
+datalines;
+AMC    4099 22 3 0
+    ...
+Datsun 8129 21 4 1
+;
+run;
+```
+
 The the `input` statement is used to specify the variable names&mdash;in this
 case, there are five columns, so we list five variable names
+
+## `auto`
+
+```
+data auto;
+  input make $ price mpg rep78 foreign;
+datalines;
+AMC    4099 22 3 0
+    ...
+Datsun 8129 21 4 1
+;
+run;
+```
 
 You may have noticed a `$` after the `make` variable name
 
 This lets SAS know that `make` is a character variable
 
-## Your First Program
+## Average MPG
 
 Let's say we're interested in calculating the average mpg for foreign and
 domestic cars in our data set
 
 We can do this using the means procedure (`proc means`)
 
+```
+proc means data=auto;
+    class foreign;
+    var mpg;
+run;
+```
+
+## Average MPG
+
+```
+proc means data=auto;
+    class foreign;
+    var mpg;
+run;
+```
+
 Here, we specify the input data (`data=auto`), the variable we want the means
 for (`var mpg`), and the "by" group (`class foreign`)
 
-As we learned above, we can submit this program in one of several ways
+## A Note on Output
 
-We'll choose batch mode and run the code from the command line using
+If we wanted to run this code in batch mode, we would do the following
 
 ```
 $ sas firstprogram.sas
 ```
-
-## Output
 
 If things go well, you won't see any output when you submit this program
 
@@ -347,6 +424,8 @@ So, where does the output go?
 
 Whenever programs (or individual SAS code blocks) are run, SAS always produces
 a log file (with file extension `.log`)
+
+## A Note on Output
 
 This gives information about the steps that were executed, how long they took,
 and messages related to any particular errors
@@ -467,7 +546,7 @@ position, SAS uses the default `VAR1` name for that column
 
 ## Loading
 
-This is what the `.lst` file looks like for `cars`
+This is what the `cars` data set looks like (from the .lst` file)
 
 ![](../images/mtcars-lst.png)
 
@@ -486,6 +565,12 @@ For example, it returns the number of observations, the number of variables,
 the variable names and formats, and much more
 
 The `varnum` option lists the variables in "creation order"
+
+## Contents
+
+`proc contents` output
+
+![](../images/proc-contents.png)
 
 ## Creating Variables
 
@@ -698,6 +783,20 @@ The default increment in a `do` loop is 1
 However, we can use the `by` keyword to increment by any positive or negative
 number
 
+## Loops
+
+The resulting data set looks like this
+
+```
+            Obs     x    x_squared
+
+             1      2         4   
+             2      4        16   
+             3      6        36   
+             4      8        64   
+             5     10       100
+```
+
 ## IF-THEN/ELSE
 
 SAS supports control flow with the `if` and `else` statements
@@ -796,8 +895,13 @@ proc ttest data=cars_4_8;
 run;
 ```
 
-8-cylinder cars in our data set have, on average, 127 more horsepower than the
-4-cylinder cars in our data set
+## Analysis
+
+The output for the t-test procedure
+
+$p$-value < 0.0001
+
+![](../images/ttest.png)
 
 # References
 
