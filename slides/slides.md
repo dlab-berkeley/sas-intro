@@ -1,6 +1,6 @@
 % Introduction to SAS
 % Juan Shishido, D-Lab, UC Berkeley
-% Month Day, 2016
+% March 10, 2016
 
 # Introduction
 
