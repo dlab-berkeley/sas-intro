@@ -1,14 +1,4 @@
-* load `mtcars.csv`;
-data cars;
-    infile '../data/mtcars.csv' dlm=',' dsd firstobs=2;
-    input model : $19. mpg cyl disp hp
-          drat wt qsec vs am gear carb;
-run;
-
-proc print data=cars;
-run;
-
-* with additional variables;
+* load `mtcars.csv` and create variables;
 data cars;
     infile '../data/mtcars.csv' dlm=',' dsd firstobs=2;
     input model : $19. mpg cyl disp hp
@@ -26,6 +16,7 @@ proc import datafile='../data/mtcars.csv'
     getnames=yes;
 run;
 
+* sort by `hp_per_liter` in descending order;
 proc sort data=cars out=power_density
         (keep=model hp liters hp_per_liter);
     by descending hp_per_liter;
@@ -47,14 +38,6 @@ proc sql;
     from cars;
 quit;
 
-* loops;
-data squares;
-    do x = 2 to 10 by 2;
-        x_squared = x ** 2;
-        output;
-    end;
-run;
-
 * IF-THEN/ELSE;
 data toyota mazda;
     set cars;
@@ -62,58 +45,28 @@ data toyota mazda;
     else if make = 'Mazda' then output mazda;
 run;
 
+* export data;
 proc export data=power_density;
     outfile='../data/power_density.csv'
     replace;
 run;
 
-proc print data=cars;
-run;
-
-proc print data=cars_imported;
-run;
-
-proc contents data=cars varnum;
-run;
-
-proc print data=power_density;
-run;
-
-proc print data=cars_summ;
-run;
-
-proc print data=cars_sql;
-run;
-
-proc print data=squares;
-run;
-
-proc print data=toyota;
-run;
-
-proc print data=mazda;
-run;
-
-proc contents data=cars varnum;
-run;
-
-proc export data=power_density
-    outfile='../data/power_density.csv'
-    replace;
-run;
-
+* frequency;
 proc freq data=cars;
     table cyl;
 run;
 
+* subset data;
 data cars_4_8;
     set cars (where=(cyl = 4 or cyl = 8));
 run;
 
+* sort `cars_4_8`;
 proc sort data=cars_4_8;
     by cyl;
 run;
 
+* ttest;
 proc ttest data=cars_4_8;
     class cyl;
     var hp;
