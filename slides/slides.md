@@ -266,6 +266,14 @@ instead of being saved to external files
 
 ## Ways to Run SAS Programs
 
+On Windows operating system
+
+Available at the D-Lab
+
+![](../images/sas-windowing-environment.png)
+
+## Ways to Run SAS Programs
+
 ### SAS Studio
 
 >SAS Studio is a developmental web application for SAS that you access through
@@ -282,7 +290,7 @@ In subsequent workshops, we'll use SAS Studio
 
 ### SAS Studio
 
-![](../images/sas-studio.png)
+![](../images/sas-studio-vm-session.png)
 
 ## Ways to Run SAS Programs
 
