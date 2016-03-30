@@ -59,6 +59,16 @@ then choose your operating system.
     * Next
     * Import
 
+**Connect a data folder**
+
+1. Select (highlight) "SAS-University-Edition"
+2. Open the machine settings
+    * Machine > Settings
+3. Go to "Shared Folders" (on the right, across the top)
+4. Click the plus icon on the right side of the window
+5. Select a folder to add
+6. Make sure "Read-only" is **not** selected and "Auto-mount" **is** selected
+
 **Starting the vApp**
 
 1. Select (highlight) "SAS-University-Edition"
